@@ -27,10 +27,10 @@ release_latest:
 	docker push $(NAME)/sphinx-doc-programming:latest
 
 tag_major_minor:
-	docker tag $(NAME)/sphinx-doc:$(VERSION) $(NAME)/base:$(MAJOR)
-	docker tag $(NAME)/sphinx-doc:$(VERSION) $(NAME)/base:$(MAJOR).$(MINOR)
-	docker tag $(NAME)/sphinx-doc-programming:$(VERSION) $(NAME)/base:$(MAJOR)
-	docker tag $(NAME)/sphinx-doc-programming:$(VERSION) $(NAME)/base:$(MAJOR).$(MINOR)
+	docker tag $(NAME)/sphinx-doc:$(VERSION) $(NAME)/sphinx-doc:$(MAJOR)
+	docker tag $(NAME)/sphinx-doc:$(VERSION) $(NAME)/sphinx-doc:$(MAJOR).$(MINOR)
+	docker tag $(NAME)/sphinx-doc-programming:$(VERSION) $(NAME)/sphinx-doc-programming:$(MAJOR)
+	docker tag $(NAME)/sphinx-doc-programming:$(VERSION) $(NAME)/sphinx-doc-programming:$(MAJOR).$(MINOR)
 
 release: tag_major_minor
 	@if ! docker images $(NAME)/sphinx-doc | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/sphinx-doc version $(VERSION) is not yet built. Please run 'make build'"; false; fi
